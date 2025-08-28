@@ -1,0 +1,427 @@
+{
+  "workflows": {
+    "misreview": {
+      "id": "misreview",
+      "name": "誤審査",
+      "description": "誤った審査結果の修正対応",
+      "icon": "fas fa-exclamation-triangle",
+      "color": "#ffc107",
+      "steps": [
+        {
+          "step": 1,
+          "name": "審査種類選択",
+          "type": "selection",
+          "completed": false
+        },
+        {
+          "step": 2,
+          "name": "ポリシー選択",
+          "type": "policy_selection",
+          "required": true,
+          "completed": false
+        },
+        {
+          "step": 3,
+          "name": "状態選択",
+          "type": "status_selection",
+          "options": ["誤審査"],
+          "completed": false
+        },
+        {
+          "step": 4,
+          "name": "詳細入力",
+          "type": "form_input",
+          "required_fields": [
+            "contactName",
+            "myName",
+            "opening",
+            "channel",
+            "overview",
+            "ecid",
+            "detailedPolicy",
+            "status",
+            "adtype"
+          ],
+          "optional_fields": [],
+          "completed": false
+        },
+        {
+          "step": 5,
+          "name": "確認・生成",
+          "type": "generation",
+          "completed": false
+        }
+      ],
+      "templates": [
+        "review_approved",
+        "review_already_resolved",
+        "review_checking"
+      ]
+    },
+    "disapproval": {
+      "id": "disapproval",
+      "name": "不承認",
+      "description": "ポリシー違反による不承認対応",
+      "icon": "fas fa-times-circle",
+      "color": "#dc3545",
+      "steps": [
+        {
+          "step": 1,
+          "name": "審査種類選択",
+          "type": "selection",
+          "completed": false
+        },
+        {
+          "step": 2,
+          "name": "ポリシー選択",
+          "type": "policy_selection",
+          "required": true,
+          "completed": false
+        },
+        {
+          "step": 3,
+          "name": "状態選択",
+          "type": "status_selection",
+          "options": [
+            "不承認（審査部署から回答あり）",
+            "不承認（推測）"
+          ],
+          "completed": false
+        },
+        {
+          "step": 4,
+          "name": "詳細入力",
+          "type": "conditional_form",
+          "conditions": {
+            "不承認（審査部署から回答あり）": {
+              "required_fields": [
+                "contactName",
+                "myName",
+                "opening",
+                "channel",
+                "ecid",
+                "customerName",
+                "contactPerson",
+                "adtype",
+                "inquiry"
+              ],
+              "optional_fields": ["dnw"]
+            },
+            "不承認（推測）": {
+              "required_fields": [
+                "contactName",
+                "myName",
+                "opening",
+                "channel",
+                "overview",
+                "ecid",
+                "detailedPolicy",
+                "violationDetails"
+              ],
+              "optional_fields": []
+            }
+          },
+          "completed": false
+        },
+        {
+          "step": 5,
+          "name": "確認・生成",
+          "type": "generation",
+          "completed": false
+        }
+      ],
+      "templates": [
+        "disapproval_with_response",
+        "disapproval_speculation",
+        "disapproval_multiple_violations"
+      ]
+    },
+    "certification": {
+      "id": "certification",
+      "name": "Cert 認定",
+      "description": "認定申請の処理",
+      "icon": "fas fa-certificate",
+      "color": "#198754",
+      "steps": [
+        {
+          "step": 1,
+          "name": "審査種類選択",
+          "type": "selection",
+          "completed": false
+        },
+        {
+          "step": 2,
+          "name": "認定カテゴリ選択",
+          "type": "certification_category",
+          "options": [
+            "オンラインギャンブル",
+            "出会い系とコンパニオンサービス",
+            "ヘルスケア",
+            "遠隔医療事業者",
+            "債務関連サービス"
+          ],
+          "completed": false
+        },
+        {
+          "step": 3,
+          "name": "状態選択",
+          "type": "status_selection",
+          "options": ["承認", "不承認"],
+          "completed": false
+        },
+        {
+          "step": 4,
+          "name": "詳細入力",
+          "type": "conditional_form",
+          "conditions": {
+            "承認": {
+              "required_fields": [
+                "contactName",
+                "myName",
+                "certName",
+                "certEcid",
+                "certDomain"
+              ],
+              "optional_fields": [
+                "thankYouNote",
+                "restrictedNotation",
+                "safeSearchRequired",
+                "appealRequired"
+              ]
+            },
+            "不承認": {
+              "required_fields": [
+                "contactName",
+                "myName",
+                "certName",
+                "certEcid",
+                "certDomain",
+                "rejectionReason"
+              ],
+              "optional_fields": []
+            }
+          },
+          "completed": false
+        },
+        {
+          "step": 5,
+          "name": "確認・生成",
+          "type": "generation",
+          "completed": false
+        }
+      ],
+      "templates": [
+        "cert_approved",
+        "cert_already_certified",
+        "cert_rejected"
+      ]
+    },
+    "other": {
+      "id": "other",
+      "name": "その他",
+      "description": "その他の対応",
+      "icon": "fas fa-ellipsis-h",
+      "color": "#0dcaf0",
+      "steps": [
+        {
+          "step": 1,
+          "name": "審査種類選択",
+          "type": "selection",
+          "completed": false
+        },
+        {
+          "step": 2,
+          "name": "対応種類選択",
+          "type": "other_type_selection",
+          "options": [
+            "その他（Need info）",
+            "一時返信",
+            "フォローメール",
+            "強制停止",
+            "審査中",
+            "Bug報告",
+            "認証PB"
+          ],
+          "completed": false
+        },
+        {
+          "step": 3,
+          "name": "詳細入力",
+          "type": "conditional_form",
+          "conditions": {
+            "その他（Need info）": {
+              "required_fields": [
+                "contactName",
+                "myName",
+                "opening",
+                "channel",
+                "overview",
+                "requiredInfo"
+              ]
+            },
+            "一時返信": {
+              "required_fields": [
+                "contactName",
+                "myName",
+                "detailedPolicy",
+                "delayReason",
+                "replyDate"
+              ],
+              "optional_fields": [
+                "firstOrNot",
+                "selfOrNot"
+              ]
+            },
+            "フォローメール": {
+              "required_fields": [
+                "contactName",
+                "myName",
+                "previousEmailDate",
+                "previousEmailSubject"
+              ]
+            },
+            "強制停止": {
+              "required_fields": [
+                "contactName",
+                "myName",
+                "reason",
+                "actionTaken"
+              ]
+            }
+          },
+          "completed": false
+        },
+        {
+          "step": 4,
+          "name": "確認・生成",
+          "type": "generation",
+          "completed": false
+        }
+      ],
+      "templates": [
+        "other_need_info",
+        "other_temp_reply",
+        "other_follow_mail",
+        "other_force_stop",
+        "other_under_review",
+        "other_bug_report",
+        "other_auth_pb"
+      ]
+    }
+  },
+  "transitions": {
+    "misreview": {
+      "1": ["2"],
+      "2": ["3"],
+      "3": ["4"],
+      "4": ["5"],
+      "5": []
+    },
+    "disapproval": {
+      "1": ["2"],
+      "2": ["3"],
+      "3": ["4"],
+      "4": ["5"],
+      "5": []
+    },
+    "certification": {
+      "1": ["2"],
+      "2": ["3"],
+      "3": ["4"],
+      "4": ["5"],
+      "5": []
+    },
+    "other": {
+      "1": ["2"],
+      "2": ["3"],
+      "3": ["4"],
+      "4": []
+    }
+  },
+  "validation_rules": {
+    "ecid": {
+      "pattern": "^\\d{10}$",
+      "message": "ECIDは10桁の数字で入力してください"
+    },
+    "email": {
+      "pattern": "^[^\\s@]+@[^\\s@]+\\.[^\\s@]+$",
+      "message": "有効なメールアドレスを入力してください"
+    },
+    "date": {
+      "pattern": "^\\d{4}-\\d{2}-\\d{2}$",
+      "message": "日付はYYYY-MM-DD形式で入力してください"
+    },
+    "url": {
+      "pattern": "^https?://.*",
+      "message": "URLはhttp://またはhttps://で始まる必要があります"
+    },
+    "domain": {
+      "pattern": "^[a-z0-9.-]+\\.[a-z]{2,}$",
+      "message": "有効なドメイン名を入力してください"
+    }
+  },
+  "ui_config": {
+    "theme": "light",
+    "language": "ja",
+    "animations": true,
+    "auto_save": true,
+    "auto_save_interval": 30000,
+    "preview_enabled": true,
+    "keyboard_shortcuts": true,
+    "tooltips": true,
+    "confirmation_dialogs": true,
+    "progress_indicators": true
+  },
+  "permissions": {
+    "admin": {
+      "can_edit_templates": true,
+      "can_edit_workflows": true,
+      "can_view_logs": true,
+      "can_export_data": true
+    },
+    "user": {
+      "can_edit_templates": false,
+      "can_edit_workflows": false,
+      "can_view_logs": false,
+      "can_export_data": false
+    }
+  },
+  "integrations": {
+    "google_sheets": {
+      "enabled": true,
+      "spreadsheet_id": "YOUR_SPREADSHEET_ID",
+      "auth_required": true
+    },
+    "email": {
+      "enabled": false,
+      "smtp_server": "",
+      "port": 587,
+      "use_tls": true
+    },
+    "slack": {
+      "enabled": false,
+      "webhook_url": "",
+      "channel": "#policy-playbook"
+    }
+  },
+  "cache_config": {
+    "enabled": true,
+    "ttl": {
+      "templates": 3600000,
+      "variables": 1800000,
+      "options": 3600000,
+      "workflows": 7200000
+    },
+    "max_size": {
+      "memory": "50MB",
+      "items": 1000
+    }
+  },
+  "logging": {
+    "enabled": true,
+    "level": "INFO",
+    "destinations": ["console", "spreadsheet"],
+    "retention_days": 30,
+    "max_entries": 10000
+  }
+}

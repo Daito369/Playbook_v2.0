@@ -1,0 +1,147 @@
+# Node modules
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Environment variables
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# IDE - VSCode
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+*.code-workspace
+
+# IDE - IntelliJ
+.idea/
+*.iml
+*.iws
+*.ipr
+
+# OS files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+desktop.ini
+
+# Google Apps Script
+.clasp.json
+.clasprc.json
+*.clasp.json
+
+# Build files
+dist/
+build/
+out/
+*.zip
+*.tar.gz
+
+# Logs
+logs/
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+lerna-debug.log*
+
+# Testing
+coverage/
+.nyc_output/
+*.lcov
+.coverage
+
+# Cache
+.cache/
+.parcel-cache/
+.next/
+.nuxt/
+.vuepress/dist
+.serverless/
+.fusebox/
+.dynamodb/
+.tern-port
+.yarn/cache
+.yarn/unplugged
+.yarn/build-state.yml
+.yarn/install-state.gz
+
+# Temporary files
+*.tmp
+*.temp
+*.swp
+*.swo
+*~
+.tmp/
+temp/
+tmp/
+
+# Backup files
+*.bak
+*.backup
+*.old
+backup/
+
+# Credentials and sensitive data
+credentials.json
+token.json
+service-account-key.json
+*.pem
+*.key
+*.cert
+*.crt
+
+# Project specific
+/data/exports/
+/data/backups/
+/scripts/local/
+.spreadsheet-cache/
+audit-logs/
+
+# Documentation build
+docs/_build/
+docs/.doctrees/
+
+# Package manager locks (keep one)
+# package-lock.json
+# yarn.lock
+# pnpm-lock.yaml
+
+# Google Drive files
+*.gdoc
+*.gsheet
+*.gslides
+*.gdraw
+
+# Archives
+*.rar
+*.7z
+*.dmg
+*.gz
+*.iso
+*.jar
+*.tar
+
+# Database
+*.sql
+*.sqlite
+*.sqlite3
+*.db
+
+# Other
+.history/
+.eslintcache
+.stylelintcache
+*.pid
+*.seed
+*.pid.lock

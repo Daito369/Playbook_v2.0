@@ -1,0 +1,521 @@
+{
+  "categories": {
+    "misrepresentation": {
+      "id": "misrepresentation",
+      "name": "不実表示",
+      "description": "誤解を招く表現や虚偽の情報に関するポリシー",
+      "icon": "fas fa-exclamation-triangle",
+      "color": "#ff9800",
+      "subcategories": {
+        "untrustworthy_claims": {
+          "id": "untrustworthy_claims",
+          "name": "信頼できない文言",
+          "description": "根拠のない主張や誇大広告",
+          "templates": ["disapproval_untrustworthy", "review_untrustworthy"],
+          "workflow_types": ["misreview", "disapproval"]
+        },
+        "misleading_content": {
+          "id": "misleading_content",
+          "name": "誤解を招く表現",
+          "description": "ユーザーを欺く可能性のある内容",
+          "templates": ["disapproval_misleading", "review_misleading"],
+          "workflow_types": ["misreview", "disapproval"]
+        },
+        "clickbait": {
+          "id": "clickbait",
+          "name": "クリックベイト",
+          "description": "煽情的な見出しや誇張表現",
+          "templates": ["disapproval_clickbait"],
+          "workflow_types": ["disapproval"]
+        },
+        "unavailable_offers": {
+          "id": "unavailable_offers",
+          "name": "利用できない特典",
+          "description": "実際には提供されない特典や割引",
+          "templates": ["disapproval_unavailable"],
+          "workflow_types": ["disapproval"]
+        },
+        "inappropriate_pricing": {
+          "id": "inappropriate_pricing",
+          "name": "不適切な価格設定",
+          "description": "誤解を招く価格表示",
+          "templates": ["disapproval_pricing"],
+          "workflow_types": ["disapproval"]
+        },
+        "manipulated_media": {
+          "id": "manipulated_media",
+          "name": "操作されたメディア",
+          "description": "加工や編集により誤解を招くメディア",
+          "templates": ["disapproval_manipulated"],
+          "workflow_types": ["disapproval"]
+        }
+      }
+    },
+    "business_requirements": {
+      "id": "business_requirements",
+      "name": "ビジネス情報の要件",
+      "description": "ビジネス情報の表示に関する要件",
+      "icon": "fas fa-building",
+      "color": "#2196f3",
+      "subcategories": {
+        "business_name_visibility": {
+          "id": "business_name_visibility",
+          "name": "ビジネス名の視認性の高さ",
+          "description": "ビジネス名が明瞭に表示されていない",
+          "templates": ["disapproval_business_name"],
+          "workflow_types": ["disapproval"]
+        },
+        "logo_visibility": {
+          "id": "logo_visibility",
+          "name": "ロゴの視認性の高さ",
+          "description": "ロゴが明瞭に表示されていない",
+          "templates": ["disapproval_logo_visibility"],
+          "workflow_types": ["disapproval"]
+        },
+        "logo_inappropriate": {
+          "id": "logo_inappropriate",
+          "name": "ビジネスのロゴが不適切",
+          "description": "ロゴが不鮮明または不適切",
+          "templates": ["disapproval_logo_inappropriate"],
+          "workflow_types": ["disapproval"]
+        },
+        "irrelevant_logo": {
+          "id": "irrelevant_logo",
+          "name": "関連性のないロゴ",
+          "description": "ビジネスと無関係なロゴの使用",
+          "templates": ["disapproval_irrelevant_logo"],
+          "workflow_types": ["disapproval"]
+        }
+      }
+    },
+    "dangerous_products": {
+      "id": "dangerous_products",
+      "name": "危険な商品やサービス",
+      "description": "危険または有害な商品・サービスに関するポリシー",
+      "icon": "fas fa-exclamation-circle",
+      "color": "#f44336",
+      "subcategories": {
+        "explosives": {
+          "id": "explosives",
+          "name": "爆発物",
+          "description": "爆発物や花火などの危険物",
+          "templates": ["disapproval_explosives"],
+          "workflow_types": ["disapproval"]
+        },
+        "guns_weapons": {
+          "id": "guns_weapons",
+          "name": "銃、銃部品、関連商品",
+          "description": "銃器や武器に関連する商品",
+          "templates": ["disapproval_weapons"],
+          "workflow_types": ["disapproval"]
+        },
+        "recreational_drugs": {
+          "id": "recreational_drugs",
+          "name": "危険ドラッグ",
+          "description": "違法薬物や危険な薬物",
+          "templates": ["disapproval_drugs"],
+          "workflow_types": ["disapproval"]
+        },
+        "tobacco": {
+          "id": "tobacco",
+          "name": "タバコ",
+          "description": "タバコ製品や関連商品",
+          "templates": ["disapproval_tobacco"],
+          "workflow_types": ["disapproval"]
+        }
+      }
+    },
+    "inappropriate_content": {
+      "id": "inappropriate_content",
+      "name": "不適切なコンテンツ",
+      "description": "不適切または有害なコンテンツに関するポリシー",
+      "icon": "fas fa-ban",
+      "color": "#9c27b0",
+      "subcategories": {
+        "dangerous_content": {
+          "id": "dangerous_content",
+          "name": "危険または中傷的なコンテンツ",
+          "description": "他者に危害を加える可能性のあるコンテンツ",
+          "templates": ["disapproval_dangerous_content"],
+          "workflow_types": ["disapproval"]
+        },
+        "sensitive_events": {
+          "id": "sensitive_events",
+          "name": "デリケートな事象",
+          "description": "災害や悲劇的な出来事に関する不適切な内容",
+          "templates": ["disapproval_sensitive"],
+          "workflow_types": ["disapproval"]
+        },
+        "shocking_content": {
+          "id": "shocking_content",
+          "name": "衝撃的なコンテンツ",
+          "description": "過度に暴力的または不快な内容",
+          "templates": ["disapproval_shocking"],
+          "workflow_types": ["disapproval"]
+        },
+        "sexual_content": {
+          "id": "sexual_content",
+          "name": "露骨な性的コンテンツ",
+          "description": "性的な内容を含むコンテンツ",
+          "templates": ["disapproval_sexual"],
+          "workflow_types": ["disapproval"]
+        },
+        "child_abuse_imagery": {
+          "id": "child_abuse_imagery",
+          "name": "児童への性的虐待の画像",
+          "description": "児童の安全に関わる重大な違反",
+          "templates": ["disapproval_child_safety"],
+          "workflow_types": ["disapproval"]
+        }
+      }
+    },
+    "healthcare_medicines": {
+      "id": "healthcare_medicines",
+      "name": "ヘルスケア、医薬品",
+      "description": "医療や医薬品に関するポリシー",
+      "icon": "fas fa-heartbeat",
+      "color": "#4caf50",
+      "subcategories": {
+        "unapproved_substances": {
+          "id": "unapproved_substances",
+          "name": "不承認の薬物",
+          "description": "未承認または規制対象の薬物",
+          "templates": ["disapproval_unapproved_drugs"],
+          "workflow_types": ["disapproval"]
+        },
+        "prescription_drugs": {
+          "id": "prescription_drugs",
+          "name": "処方薬",
+          "description": "処方箋が必要な医薬品",
+          "templates": ["disapproval_prescription"],
+          "workflow_types": ["disapproval"]
+        },
+        "otc_drugs": {
+          "id": "otc_drugs",
+          "name": "一般医薬品の販売",
+          "description": "市販薬の販売に関する規制",
+          "templates": ["disapproval_otc", "cert_otc"],
+          "workflow_types": ["disapproval", "certification"]
+        },
+        "restricted_keywords": {
+          "id": "restricted_keywords",
+          "name": "制限付き薬物に関するキーワード",
+          "description": "薬物関連の制限キーワード",
+          "templates": ["disapproval_drug_keywords"],
+          "workflow_types": ["disapproval"]
+        }
+      }
+    },
+    "youtube_discover": {
+      "id": "youtube_discover",
+      "name": "YouTube と Discover フィードの広告要件",
+      "description": "YouTube および Discover 固有の要件",
+      "icon": "fab fa-youtube",
+      "color": "#ff0000",
+      "subcategories": {
+        "inappropriate_content_yt": {
+          "id": "inappropriate_content_yt",
+          "name": "YTCQ - 不適切なコンテンツ",
+          "description": "YouTube で不適切とされるコンテンツ",
+          "templates": ["disapproval_yt_inappropriate"],
+          "workflow_types": ["disapproval"]
+        },
+        "exaggerated_claims": {
+          "id": "exaggerated_claims",
+          "name": "YTCQ - 誇張表現や不正確な表現",
+          "description": "誇張された主張や虚偽の表現",
+          "templates": ["disapproval_yt_exaggerated"],
+          "workflow_types": ["disapproval"]
+        },
+        "negative_events": {
+          "id": "negative_events",
+          "name": "YTCQ - ネガティブな出来事および画像",
+          "description": "不快感を与える出来事や画像",
+          "templates": ["disapproval_yt_negative"],
+          "workflow_types": ["disapproval"]
+        }
+      }
+    },
+    "editorial": {
+      "id": "editorial",
+      "name": "編集",
+      "description": "広告の編集基準に関するポリシー",
+      "icon": "fas fa-edit",
+      "color": "#607d8b",
+      "subcategories": {
+        "unclear_relevance": {
+          "id": "unclear_relevance",
+          "name": "関連性が不明確",
+          "description": "広告とランディングページの関連性が不明",
+          "templates": ["disapproval_unclear_relevance"],
+          "workflow_types": ["disapproval"]
+        },
+        "capitalization": {
+          "id": "capitalization",
+          "name": "大文字",
+          "description": "不適切な大文字の使用",
+          "templates": ["disapproval_capitalization"],
+          "workflow_types": ["disapproval"]
+        },
+        "punctuation": {
+          "id": "punctuation",
+          "name": "句読点と記号",
+          "description": "不適切な句読点や記号の使用",
+          "templates": ["disapproval_punctuation"],
+          "workflow_types": ["disapproval"]
+        },
+        "repetition": {
+          "id": "repetition",
+          "name": "重複表現",
+          "description": "不必要な繰り返し表現",
+          "templates": ["disapproval_repetition"],
+          "workflow_types": ["disapproval"]
+        },
+        "phone_numbers": {
+          "id": "phone_numbers",
+          "name": "広告文に記載された電話番号",
+          "description": "広告文内の電話番号表記",
+          "templates": ["disapproval_phone_in_ad"],
+          "workflow_types": ["disapproval"]
+        }
+      }
+    },
+    "technical_requirements": {
+      "id": "technical_requirements",
+      "name": "技術要件",
+      "description": "技術的な要件やフォーマットに関するポリシー",
+      "icon": "fas fa-cog",
+      "color": "#795548",
+      "subcategories": {
+        "destination_mismatch": {
+          "id": "destination_mismatch",
+          "name": "リンク先の不一致",
+          "description": "表示URLと最終URLの不一致",
+          "templates": ["disapproval_url_mismatch"],
+          "workflow_types": ["disapproval"]
+        },
+        "malware": {
+          "id": "malware",
+          "name": "不正使用されているサイト",
+          "description": "マルウェアや不正なソフトウェア",
+          "templates": ["disapproval_malware", "review_malware"],
+          "workflow_types": ["misreview", "disapproval"]
+        },
+        "broken_links": {
+          "id": "broken_links",
+          "name": "機能していないリンク先",
+          "description": "アクセスできないリンク先",
+          "templates": ["disapproval_broken_link", "review_broken_link"],
+          "workflow_types": ["misreview", "disapproval"]
+        },
+        "crawl_issues": {
+          "id": "crawl_issues",
+          "name": "クロールできないリンク先",
+          "description": "検索エンジンがアクセスできないページ",
+          "templates": ["disapproval_crawl_error", "review_crawl_error"],
+          "workflow_types": ["misreview", "disapproval"]
+        }
+      }
+    },
+    "legal_requirements": {
+      "id": "legal_requirements",
+      "name": "法的要件",
+      "description": "各地域の法律に基づく要件",
+      "icon": "fas fa-gavel",
+      "color": "#3f51b5",
+      "subcategories": {
+        "legal_requirements": {
+          "id": "legal_requirements",
+          "name": "法的要件",
+          "description": "医療広告ガイドラインや薬機法などの法的要件",
+          "templates": ["disapproval_legal"],
+          "workflow_types": ["disapproval"]
+        }
+      }
+    },
+    "trademark": {
+      "id": "trademark",
+      "name": "商標",
+      "description": "商標権に関するポリシー",
+      "icon": "fas fa-trademark",
+      "color": "#00bcd4",
+      "subcategories": {
+        "trademark_violation": {
+          "id": "trademark_violation",
+          "name": "商標",
+          "description": "商標権の侵害",
+          "templates": ["disapproval_trademark"],
+          "workflow_types": ["disapproval"]
+        }
+      }
+    },
+    "restricted_content": {
+      "id": "restricted_content",
+      "name": "制限付きコンテンツ",
+      "description": "一部制限または厳しく制限されるコンテンツ",
+      "icon": "fas fa-exclamation",
+      "color": "#ff5722",
+      "subcategories": {
+        "alcohol": {
+          "id": "alcohol",
+          "name": "アルコール",
+          "description": "アルコール関連の広告",
+          "templates": ["disapproval_alcohol"],
+          "workflow_types": ["disapproval"]
+        },
+        "gambling": {
+          "id": "gambling",
+          "name": "ギャンブル、ゲーム",
+          "description": "ギャンブルやカジノ関連",
+          "templates": ["disapproval_gambling", "cert_gambling"],
+          "workflow_types": ["disapproval", "certification"]
+        },
+        "dating": {
+          "id": "dating",
+          "name": "出会い系とコンパニオンサービス",
+          "description": "出会い系サービス",
+          "templates": ["disapproval_dating", "cert_dating"],
+          "workflow_types": ["disapproval", "certification"]
+        },
+        "financial": {
+          "id": "financial",
+          "name": "金融商品およびサービス",
+          "description": "金融関連サービス",
+          "templates": ["disapproval_financial"],
+          "workflow_types": ["disapproval"]
+        },
+        "cryptocurrency": {
+          "id": "cryptocurrency",
+          "name": "暗号通貨と関連商品",
+          "description": "暗号通貨関連",
+          "templates": ["disapproval_crypto"],
+          "workflow_types": ["disapproval"]
+        }
+      }
+    },
+    "image_requirements": {
+      "id": "image_requirements",
+      "name": "画像アセットのフォーマットの要件",
+      "description": "画像の品質とフォーマットに関する要件",
+      "icon": "fas fa-image",
+      "color": "#9e9e9e",
+      "subcategories": {
+        "blurry_images": {
+          "id": "blurry_images",
+          "name": "ぼやけた画像や不鮮明な画像",
+          "description": "画質が低い画像",
+          "templates": ["disapproval_blurry"],
+          "workflow_types": ["disapproval"]
+        },
+        "cropping_issues": {
+          "id": "cropping_issues",
+          "name": "切り抜き方に問題がある画像",
+          "description": "不適切にトリミングされた画像",
+          "templates": ["disapproval_cropping"],
+          "workflow_types": ["disapproval"]
+        },
+        "text_overlay": {
+          "id": "text_overlay",
+          "name": "テキストまたはグラフィックのオーバーレイ",
+          "description": "過度なテキストやグラフィックの重ね",
+          "templates": ["disapproval_overlay"],
+          "workflow_types": ["disapproval"]
+        },
+        "collage": {
+          "id": "collage",
+          "name": "コラージュ",
+          "description": "複数の画像を組み合わせた画像",
+          "templates": ["disapproval_collage"],
+          "workflow_types": ["disapproval"]
+        },
+        "excessive_blank": {
+          "id": "excessive_blank",
+          "name": "空白の多すぎる画像",
+          "description": "空白部分が多すぎる画像",
+          "templates": ["disapproval_blank_space"],
+          "workflow_types": ["disapproval"]
+        }
+      }
+    },
+    "other_policies": {
+      "id": "other_policies",
+      "name": "その他のポリシー",
+      "description": "その他の各種ポリシー",
+      "icon": "fas fa-ellipsis-h",
+      "color": "#673ab7",
+      "subcategories": {
+        "copyright": {
+          "id": "copyright",
+          "name": "著作権",
+          "description": "著作権侵害",
+          "templates": ["disapproval_copyright"],
+          "workflow_types": ["disapproval"]
+        },
+        "privacy": {
+          "id": "privacy",
+          "name": "プライバシー",
+          "description": "プライバシー侵害",
+          "templates": ["disapproval_privacy"],
+          "workflow_types": ["disapproval"]
+        },
+        "personalized_ads": {
+          "id": "personalized_ads",
+          "name": "パーソナライズド広告",
+          "description": "パーソナライズド広告の制限",
+          "templates": ["disapproval_personalized"],
+          "workflow_types": ["disapproval"]
+        },
+        "advertiser_verification": {
+          "id": "advertiser_verification",
+          "name": "広告主様の適格性確認",
+          "description": "広告主の認証要件",
+          "templates": ["disapproval_verification"],
+          "workflow_types": ["disapproval"]
+        }
+      }
+    }
+  },
+  "workflow_category_mapping": {
+    "misreview": [
+      "misrepresentation",
+      "technical_requirements",
+      "business_requirements"
+    ],
+    "disapproval": [
+      "misrepresentation",
+      "business_requirements",
+      "dangerous_products",
+      "inappropriate_content",
+      "healthcare_medicines",
+      "youtube_discover",
+      "editorial",
+      "technical_requirements",
+      "legal_requirements",
+      "trademark",
+      "restricted_content",
+      "image_requirements",
+      "other_policies"
+    ],
+    "certification": [
+      "restricted_content",
+      "healthcare_medicines",
+      "financial"
+    ],
+    "other": []
+  },
+  "priority_order": [
+    "legal_requirements",
+    "inappropriate_content",
+    "dangerous_products",
+    "healthcare_medicines",
+    "misrepresentation",
+    "trademark",
+    "restricted_content",
+    "business_requirements",
+    "technical_requirements",
+    "editorial",
+    "youtube_discover",
+    "image_requirements",
+    "other_policies"
+  ]
+}

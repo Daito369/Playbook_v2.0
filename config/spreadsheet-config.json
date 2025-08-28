@@ -1,0 +1,692 @@
+{
+  "spreadsheet": {
+    "id": "YOUR_SPREADSHEET_ID_HERE",
+    "name": "PolicyPlayBook-Database",
+    "locale": "ja_JP",
+    "timezone": "Asia/Tokyo",
+    "sharing": {
+      "access": "PRIVATE",
+      "editors": ["admin@example.com"],
+      "viewers": ["team@example.com"]
+    }
+  },
+  "sheets": {
+    "templates": {
+      "name": "Templates",
+      "id": 0,
+      "columns": [
+        {
+          "name": "template_id",
+          "type": "STRING",
+          "required": true,
+          "unique": true,
+          "width": 150
+        },
+        {
+          "name": "workflow_type",
+          "type": "STRING",
+          "required": true,
+          "width": 120,
+          "validation": {
+            "type": "LIST",
+            "values": ["誤審査", "不承認", "認定", "その他"]
+          }
+        },
+        {
+          "name": "category",
+          "type": "STRING",
+          "required": true,
+          "width": 120
+        },
+        {
+          "name": "subcategory",
+          "type": "STRING",
+          "required": true,
+          "width": 120
+        },
+        {
+          "name": "template_name",
+          "type": "STRING",
+          "required": true,
+          "width": 200
+        },
+        {
+          "name": "template_content",
+          "type": "TEXT",
+          "required": true,
+          "width": 400
+        },
+        {
+          "name": "required_variables",
+          "type": "JSON",
+          "required": true,
+          "width": 200,
+          "default": "[]"
+        },
+        {
+          "name": "optional_variables",
+          "type": "JSON",
+          "required": false,
+          "width": 200,
+          "default": "[]"
+        },
+        {
+          "name": "conditions",
+          "type": "JSON",
+          "required": false,
+          "width": 200,
+          "default": "{}"
+        },
+        {
+          "name": "workflow_step",
+          "type": "NUMBER",
+          "required": true,
+          "width": 100
+        },
+        {
+          "name": "is_active",
+          "type": "BOOLEAN",
+          "required": true,
+          "width": 80,
+          "default": "TRUE",
+          "validation": {
+            "type": "CHECKBOX"
+          }
+        },
+        {
+          "name": "version",
+          "type": "NUMBER",
+          "required": true,
+          "width": 80,
+          "default": "1.0"
+        },
+        {
+          "name": "created_at",
+          "type": "DATETIME",
+          "required": true,
+          "width": 150,
+          "format": "yyyy-MM-dd HH:mm:ss"
+        },
+        {
+          "name": "updated_at",
+          "type": "DATETIME",
+          "required": true,
+          "width": 150,
+          "format": "yyyy-MM-dd HH:mm:ss"
+        },
+        {
+          "name": "created_by",
+          "type": "STRING",
+          "required": true,
+          "width": 150
+        },
+        {
+          "name": "notes",
+          "type": "TEXT",
+          "required": false,
+          "width": 200
+        }
+      ],
+      "headerStyle": {
+        "backgroundColor": "#4285f4",
+        "fontColor": "#ffffff",
+        "fontSize": 11,
+        "bold": true,
+        "horizontalAlignment": "CENTER"
+      },
+      "dataValidation": {
+        "preventDuplicates": ["template_id"],
+        "requiredFields": ["template_id", "workflow_type", "category", "template_name", "template_content"]
+      },
+      "protectedRanges": [
+        {
+          "range": "A:A",
+          "description": "Template ID column",
+          "editors": ["admin@example.com"]
+        }
+      ]
+    },
+    "variables": {
+      "name": "Variables",
+      "id": 1,
+      "columns": [
+        {
+          "name": "variable_name",
+          "type": "STRING",
+          "required": true,
+          "unique": true,
+          "width": 150
+        },
+        {
+          "name": "display_name",
+          "type": "STRING",
+          "required": true,
+          "width": 150
+        },
+        {
+          "name": "variable_type",
+          "type": "STRING",
+          "required": true,
+          "width": 120,
+          "validation": {
+            "type": "LIST",
+            "values": ["text", "email", "tel", "number", "textarea", "select", "date", "datetime-local", "checkbox", "radio", "range"]
+          }
+        },
+        {
+          "name": "input_type",
+          "type": "STRING",
+          "required": true,
+          "width": 120
+        },
+        {
+          "name": "is_required",
+          "type": "BOOLEAN",
+          "required": true,
+          "width": 100,
+          "validation": {
+            "type": "CHECKBOX"
+          }
+        },
+        {
+          "name": "default_value",
+          "type": "STRING",
+          "required": false,
+          "width": 150
+        },
+        {
+          "name": "validation_rule",
+          "type": "STRING",
+          "required": false,
+          "width": 150
+        },
+        {
+          "name": "placeholder",
+          "type": "STRING",
+          "required": false,
+          "width": 150
+        },
+        {
+          "name": "help_text",
+          "type": "TEXT",
+          "required": false,
+          "width": 200
+        },
+        {
+          "name": "options_source",
+          "type": "STRING",
+          "required": false,
+          "width": 150
+        },
+        {
+          "name": "dependencies",
+          "type": "JSON",
+          "required": false,
+          "width": 200,
+          "default": "{}"
+        },
+        {
+          "name": "sort_order",
+          "type": "NUMBER",
+          "required": true,
+          "width": 100,
+          "default": "999"
+        },
+        {
+          "name": "group_name",
+          "type": "STRING",
+          "required": false,
+          "width": 120
+        },
+        {
+          "name": "is_active",
+          "type": "BOOLEAN",
+          "required": true,
+          "width": 80,
+          "default": "TRUE",
+          "validation": {
+            "type": "CHECKBOX"
+          }
+        }
+      ],
+      "headerStyle": {
+        "backgroundColor": "#34a853",
+        "fontColor": "#ffffff",
+        "fontSize": 11,
+        "bold": true,
+        "horizontalAlignment": "CENTER"
+      },
+      "dataValidation": {
+        "preventDuplicates": ["variable_name"],
+        "requiredFields": ["variable_name", "display_name", "variable_type"]
+      }
+    },
+    "options": {
+      "name": "Options",
+      "id": 2,
+      "columns": [
+        {
+          "name": "option_id",
+          "type": "STRING",
+          "required": true,
+          "unique": true,
+          "width": 150
+        },
+        {
+          "name": "variable_name",
+          "type": "STRING",
+          "required": true,
+          "width": 150,
+          "validation": {
+            "type": "REFERENCE",
+            "sheet": "Variables",
+            "column": "variable_name"
+          }
+        },
+        {
+          "name": "option_value",
+          "type": "STRING",
+          "required": true,
+          "width": 150
+        },
+        {
+          "name": "option_label",
+          "type": "STRING",
+          "required": true,
+          "width": 300
+        },
+        {
+          "name": "condition",
+          "type": "JSON",
+          "required": false,
+          "width": 200,
+          "default": "{}"
+        },
+        {
+          "name": "sort_order",
+          "type": "NUMBER",
+          "required": true,
+          "width": 100,
+          "default": "999"
+        },
+        {
+          "name": "is_default",
+          "type": "BOOLEAN",
+          "required": false,
+          "width": 100,
+          "default": "FALSE"
+        },
+        {
+          "name": "is_active",
+          "type": "BOOLEAN",
+          "required": true,
+          "width": 80,
+          "default": "TRUE",
+          "validation": {
+            "type": "CHECKBOX"
+          }
+        },
+        {
+          "name": "metadata",
+          "type": "JSON",
+          "required": false,
+          "width": 200,
+          "default": "{}"
+        }
+      ],
+      "headerStyle": {
+        "backgroundColor": "#ea4335",
+        "fontColor": "#ffffff",
+        "fontSize": 11,
+        "bold": true,
+        "horizontalAlignment": "CENTER"
+      },
+      "dataValidation": {
+        "preventDuplicates": ["option_id"],
+        "requiredFields": ["option_id", "variable_name", "option_value", "option_label"]
+      }
+    },
+    "workflowConfig": {
+      "name": "WorkflowConfig",
+      "id": 3,
+      "columns": [
+        {
+          "name": "workflow_id",
+          "type": "STRING",
+          "required": true,
+          "unique": true,
+          "width": 150
+        },
+        {
+          "name": "workflow_type",
+          "type": "STRING",
+          "required": true,
+          "width": 150
+        },
+        {
+          "name": "step_number",
+          "type": "NUMBER",
+          "required": true,
+          "width": 100
+        },
+        {
+          "name": "step_name",
+          "type": "STRING",
+          "required": true,
+          "width": 150
+        },
+        {
+          "name": "step_type",
+          "type": "STRING",
+          "required": true,
+          "width": 120,
+          "validation": {
+            "type": "LIST",
+            "values": ["selection", "policy_selection", "status_selection", "form_input", "conditional_form", "generation"]
+          }
+        },
+        {
+          "name": "options",
+          "type": "JSON",
+          "required": true,
+          "width": 300,
+          "default": "[]"
+        },
+        {
+          "name": "next_step",
+          "type": "JSON",
+          "required": true,
+          "width": 200,
+          "default": "{}"
+        },
+        {
+          "name": "required_fields",
+          "type": "JSON",
+          "required": false,
+          "width": 300,
+          "default": "[]"
+        },
+        {
+          "name": "validation_rules",
+          "type": "JSON",
+          "required": false,
+          "width": 300,
+          "default": "{}"
+        },
+        {
+          "name": "is_terminal",
+          "type": "BOOLEAN",
+          "required": true,
+          "width": 100,
+          "default": "FALSE"
+        }
+      ],
+      "headerStyle": {
+        "backgroundColor": "#fbbc04",
+        "fontColor": "#000000",
+        "fontSize": 11,
+        "bold": true,
+        "horizontalAlignment": "CENTER"
+      }
+    },
+    "policyCategories": {
+      "name": "PolicyCategories",
+      "id": 4,
+      "columns": [
+        {
+          "name": "category_id",
+          "type": "STRING",
+          "required": true,
+          "unique": true,
+          "width": 150
+        },
+        {
+          "name": "parent_category",
+          "type": "STRING",
+          "required": false,
+          "width": 150
+        },
+        {
+          "name": "category_name",
+          "type": "STRING",
+          "required": true,
+          "width": 200
+        },
+        {
+          "name": "category_path",
+          "type": "STRING",
+          "required": true,
+          "width": 250
+        },
+        {
+          "name": "display_order",
+          "type": "NUMBER",
+          "required": true,
+          "width": 100
+        },
+        {
+          "name": "workflow_types",
+          "type": "JSON",
+          "required": true,
+          "width": 200,
+          "default": "[]"
+        },
+        {
+          "name": "icon",
+          "type": "STRING",
+          "required": false,
+          "width": 150
+        },
+        {
+          "name": "description",
+          "type": "TEXT",
+          "required": false,
+          "width": 300
+        },
+        {
+          "name": "is_active",
+          "type": "BOOLEAN",
+          "required": true,
+          "width": 80,
+          "default": "TRUE"
+        }
+      ],
+      "headerStyle": {
+        "backgroundColor": "#9c27b0",
+        "fontColor": "#ffffff",
+        "fontSize": 11,
+        "bold": true,
+        "horizontalAlignment": "CENTER"
+      }
+    },
+    "auditLog": {
+      "name": "AuditLog",
+      "id": 5,
+      "columns": [
+        {
+          "name": "log_id",
+          "type": "STRING",
+          "required": true,
+          "unique": true,
+          "width": 150,
+          "formula": "=CONCATENATE(\"LOG_\",TEXT(ROW(),\"00000\"))"
+        },
+        {
+          "name": "timestamp",
+          "type": "DATETIME",
+          "required": true,
+          "width": 150,
+          "format": "yyyy-MM-dd HH:mm:ss"
+        },
+        {
+          "name": "user",
+          "type": "STRING",
+          "required": true,
+          "width": 150
+        },
+        {
+          "name": "action",
+          "type": "STRING",
+          "required": true,
+          "width": 150
+        },
+        {
+          "name": "entity",
+          "type": "STRING",
+          "required": true,
+          "width": 150
+        },
+        {
+          "name": "entity_id",
+          "type": "STRING",
+          "required": false,
+          "width": 150
+        },
+        {
+          "name": "details",
+          "type": "JSON",
+          "required": false,
+          "width": 400
+        },
+        {
+          "name": "ip_address",
+          "type": "STRING",
+          "required": false,
+          "width": 150
+        },
+        {
+          "name": "user_agent",
+          "type": "TEXT",
+          "required": false,
+          "width": 300
+        }
+      ],
+      "headerStyle": {
+        "backgroundColor": "#607d8b",
+        "fontColor": "#ffffff",
+        "fontSize": 11,
+        "bold": true,
+        "horizontalAlignment": "CENTER"
+      },
+      "retention": {
+        "days": 90,
+        "archiveAfter": 30,
+        "maxRows": 10000
+      }
+    },
+    "cache": {
+      "name": "Cache",
+      "id": 6,
+      "columns": [
+        {
+          "name": "cache_key",
+          "type": "STRING",
+          "required": true,
+          "unique": true,
+          "width": 200
+        },
+        {
+          "name": "cache_value",
+          "type": "TEXT",
+          "required": true,
+          "width": 400
+        },
+        {
+          "name": "created_at",
+          "type": "DATETIME",
+          "required": true,
+          "width": 150
+        },
+        {
+          "name": "expires_at",
+          "type": "DATETIME",
+          "required": true,
+          "width": 150
+        },
+        {
+          "name": "hit_count",
+          "type": "NUMBER",
+          "required": true,
+          "width": 100,
+          "default": "0"
+        },
+        {
+          "name": "last_accessed",
+          "type": "DATETIME",
+          "required": false,
+          "width": 150
+        }
+      ],
+      "headerStyle": {
+        "backgroundColor": "#795548",
+        "fontColor": "#ffffff",
+        "fontSize": 11,
+        "bold": true,
+        "horizontalAlignment": "CENTER"
+      },
+      "autoCleanup": {
+        "enabled": true,
+        "interval": 3600000,
+        "maxAge": 86400000
+      }
+    }
+  },
+  "formulas": {
+    "autoIncrement": "=IF(ROW()=1,\"ID\",\"ID_\"&TEXT(ROW()-1,\"00000\"))",
+    "currentTimestamp": "=NOW()",
+    "uniqueId": "=CONCATENATE(TEXT(NOW(),\"yyyyMMddHHmmss\"),\"_\",RANDBETWEEN(1000,9999))",
+    "formattedECID": "=IF(LEN(A2)=10,CONCATENATE(LEFT(A2,3),\"-\",MID(A2,4,3),\"-\",RIGHT(A2,4)),A2)"
+  },
+  "namedRanges": {
+    "AllTemplates": "Templates!A:P",
+    "ActiveTemplates": "Templates!A2:P1000",
+    "AllVariables": "Variables!A:N",
+    "ActiveVariables": "Variables!A2:N1000",
+    "AllOptions": "Options!A:I",
+    "ActiveOptions": "Options!A2:I1000",
+    "WorkflowSteps": "WorkflowConfig!A:J",
+    "PolicyList": "PolicyCategories!C:C",
+    "RecentLogs": "AuditLog!A2:I100"
+  },
+  "importRange": {
+    "enabled": false,
+    "sources": []
+  },
+  "triggers": {
+    "onEdit": {
+      "enabled": true,
+      "functions": ["onEditTrigger"]
+    },
+    "onChange": {
+      "enabled": true,
+      "functions": ["onChangeTrigger"]
+    },
+    "timeBased": {
+      "daily": {
+        "enabled": true,
+        "hour": 2,
+        "functions": ["dailyCleanup", "generateReport"]
+      },
+      "hourly": {
+        "enabled": true,
+        "functions": ["cacheCleanup"]
+      }
+    }
+  },
+  "backup": {
+    "enabled": true,
+    "frequency": "daily",
+    "retention": 30,
+    "destination": {
+      "type": "google_drive",
+      "folderId": "YOUR_BACKUP_FOLDER_ID"
+    }
+  },
+  "performance": {
+    "batchSize": 500,
+    "maxConcurrentReads": 5,
+    "maxConcurrentWrites": 3,
+    "cacheStrategy": "aggressive",
+    "indexColumns": ["template_id", "variable_name", "option_id", "workflow_id", "category_id"]
+  }
+}

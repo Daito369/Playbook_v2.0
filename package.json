@@ -1,0 +1,210 @@
+{
+  "name": "policyplaybook",
+  "version": "2.0.0",
+  "description": "Google Ads Policy Email Auto-Generator - Workflow-driven template system",
+  "main": "src/gas/Code.gs",
+  "scripts": {
+    "dev": "clasp push --watch",
+    "push": "clasp push",
+    "pull": "clasp pull",
+    "open": "clasp open",
+    "deploy": "npm run test && npm run push && clasp deploy",
+    "deploy:prod": "npm run test:all && npm run push && clasp deploy --description 'Production deployment'",
+    "logs": "clasp logs --watch",
+    "setup:gas": "clasp login && clasp create --title 'PolicyPlayBook' --type webapp",
+    "setup:database": "clasp run setupDatabase",
+    "setup:all": "npm run setup:gas && npm run setup:database",
+    "test": "npm run test:unit",
+    "test:unit": "node tests/test-unit.js",
+    "test:integration": "node tests/test-integration.js",
+    "test:e2e": "node tests/test-e2e.js",
+    "test:all": "npm run test:unit && npm run test:integration && npm run test:e2e",
+    "lint": "eslint src/**/*.{js,gs} --fix",
+    "format": "prettier --write 'src/**/*.{js,gs,html,css,json}'",
+    "validate": "npm run lint && npm run test",
+    "clean": "rm -rf node_modules dist .clasp.json",
+    "backup": "node scripts/backup.js",
+    "restore": "node scripts/restore.js",
+    "migrate": "clasp run migrateData",
+    "cache:clear": "clasp run clearCache",
+    "logs:export": "clasp run exportLogs",
+    "stats": "clasp run getStatistics",
+    "health": "clasp run healthCheck",
+    "docs:generate": "jsdoc -c jsdoc.json",
+    "docs:serve": "http-server docs -p 8080",
+    "precommit": "npm run validate",
+    "prepush": "npm run test:all",
+    "version": "npm run docs:generate && git add -A docs",
+    "postversion": "git push && git push --tags"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/your-org/policyplaybook.git"
+  },
+  "keywords": [
+    "google-ads",
+    "policy",
+    "email-generator",
+    "workflow",
+    "google-apps-script",
+    "automation",
+    "template-engine"
+  ],
+  "author": "PolicyPlayBook Team",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/your-org/policyplaybook/issues"
+  },
+  "homepage": "https://github.com/your-org/policyplaybook#readme",
+  "engines": {
+    "node": ">=18.0.0",
+    "npm": ">=9.0.0"
+  },
+  "devDependencies": {
+    "@google/clasp": "^2.4.2",
+    "@types/google-apps-script": "^1.0.68",
+    "@typescript-eslint/eslint-plugin": "^6.17.0",
+    "@typescript-eslint/parser": "^6.17.0",
+    "dotenv": "^16.3.1",
+    "eslint": "^8.56.0",
+    "eslint-config-google": "^0.14.0",
+    "eslint-config-prettier": "^9.1.0",
+    "eslint-plugin-googleappsscript": "^1.0.4",
+    "eslint-plugin-import": "^2.29.1",
+    "eslint-plugin-jsdoc": "^48.0.2",
+    "eslint-plugin-prettier": "^5.1.2",
+    "http-server": "^14.1.1",
+    "husky": "^8.0.3",
+    "jsdoc": "^4.0.2",
+    "lint-staged": "^15.2.0",
+    "prettier": "^3.1.1",
+    "typescript": "^5.3.3"
+  },
+  "dependencies": {
+    "googleapis": "^129.0.0",
+    "dayjs": "^1.11.10",
+    "lodash": "^4.17.21"
+  },
+  "optionalDependencies": {
+    "@google-cloud/logging": "^11.0.0",
+    "@google-cloud/monitoring": "^4.1.0",
+    "@google-cloud/error-reporting": "^3.0.5"
+  },
+  "lint-staged": {
+    "*.{js,gs}": [
+      "eslint --fix",
+      "prettier --write"
+    ],
+    "*.{html,css,json,md}": [
+      "prettier --write"
+    ]
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged",
+      "pre-push": "npm run test:all"
+    }
+  },
+  "eslintConfig": {
+    "extends": [
+      "google",
+      "prettier"
+    ],
+    "plugins": [
+      "googleappsscript",
+      "jsdoc"
+    ],
+    "env": {
+      "googleappsscript/googleappsscript": true,
+      "node": true,
+      "es6": true
+    },
+    "parserOptions": {
+      "ecmaVersion": 2022,
+      "sourceType": "module"
+    },
+    "rules": {
+      "no-unused-vars": [
+        "error",
+        {
+          "argsIgnorePattern": "^_",
+          "varsIgnorePattern": "^_"
+        }
+      ],
+      "camelcase": "off",
+      "new-cap": "off",
+      "require-jsdoc": [
+        "error",
+        {
+          "require": {
+            "FunctionDeclaration": true,
+            "MethodDefinition": true,
+            "ClassDeclaration": true
+          }
+        }
+      ],
+      "valid-jsdoc": [
+        "error",
+        {
+          "requireReturn": true,
+          "requireReturnType": true,
+          "requireParamType": true
+        }
+      ]
+    }
+  },
+  "prettier": {
+    "printWidth": 100,
+    "tabWidth": 2,
+    "useTabs": false,
+    "semi": true,
+    "singleQuote": true,
+    "quoteProps": "as-needed",
+    "jsxSingleQuote": false,
+    "trailingComma": "es5",
+    "bracketSpacing": true,
+    "jsxBracketSameLine": false,
+    "arrowParens": "always",
+    "requirePragma": false,
+    "insertPragma": false,
+    "proseWrap": "preserve",
+    "htmlWhitespaceSensitivity": "css",
+    "endOfLine": "lf"
+  },
+  "jsdoc": {
+    "source": {
+      "include": [
+        "src"
+      ],
+      "exclude": [
+        "node_modules",
+        "tests"
+      ]
+    },
+    "opts": {
+      "destination": "./docs/api",
+      "recurse": true,
+      "readme": "./README.md"
+    },
+    "plugins": [
+      "plugins/markdown"
+    ],
+    "templates": {
+      "cleverLinks": false,
+      "monospaceLinks": false,
+      "default": {
+        "outputSourceFiles": true
+      }
+    }
+  },
+  "config": {
+    "commitizen": {
+      "path": "./node_modules/cz-conventional-changelog"
+    }
+  },
+  "browserslist": [
+    "> 1%",
+    "last 2 versions",
+    "not dead"
+  ]
+}

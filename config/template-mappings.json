@@ -1,0 +1,569 @@
+{
+  "version": "2.0",
+  "lastUpdated": "2024-01-01T00:00:00Z",
+  "templates": {
+    "review_approved": {
+      "id": "review_approved",
+      "name": "再審査→承認済み（誤審）",
+      "workflow_type": "misreview",
+      "category": "再審査",
+      "subcategory": "承認済み（誤審）",
+      "description": "誤審査が確認され、承認済みに変更された場合のテンプレート",
+      "variables": {
+        "required": [
+          "contactName",
+          "myName",
+          "opening",
+          "channel",
+          "overview",
+          "ecid",
+          "detailedPolicy",
+          "status",
+          "adtype"
+        ],
+        "optional": [],
+        "computed": [
+          "formattedECID",
+          "statusText",
+          "formattedDate",
+          "today"
+        ]
+      },
+      "content_path": "templates/misreview/review_approved.txt",
+      "preview": "{{contactName}} 様\n\n平素よりお世話になっております。\nGoogle 広告サポートチームの{{myName}}でございます..."
+    },
+    "review_already_resolved": {
+      "id": "review_already_resolved",
+      "name": "再審査→既に解消済み",
+      "workflow_type": "misreview",
+      "category": "再審査",
+      "subcategory": "解消済み",
+      "description": "問題が既に解消されている場合のテンプレート",
+      "variables": {
+        "required": [
+          "contactName",
+          "myName",
+          "opening",
+          "channel",
+          "overview",
+          "formattedDate"
+        ],
+        "optional": [
+          "detailedPolicy"
+        ],
+        "computed": []
+      },
+      "content_path": "templates/misreview/review_already_resolved.txt"
+    },
+    "review_checking": {
+      "id": "review_checking",
+      "name": "審査中",
+      "workflow_type": "misreview",
+      "category": "再審査",
+      "subcategory": "審査中",
+      "description": "現在審査中の場合のテンプレート",
+      "variables": {
+        "required": [
+          "contactName",
+          "myName",
+          "opening",
+          "channel",
+          "overview",
+          "detailedPolicy"
+        ],
+        "optional": [],
+        "computed": [
+          "formattedDate"
+        ]
+      },
+      "content_path": "templates/misreview/review_checking.txt"
+    },
+    "disapproval_with_response": {
+      "id": "disapproval_with_response",
+      "name": "不承認（審査部署から回答あり）",
+      "workflow_type": "disapproval",
+      "category": "不承認",
+      "subcategory": "回答あり",
+      "description": "審査部署から具体的な回答がある場合のテンプレート",
+      "variables": {
+        "required": [
+          "contactName",
+          "myName",
+          "opening",
+          "channel",
+          "ecid",
+          "customerName",
+          "contactPerson",
+          "adtype",
+          "inquiry"
+        ],
+        "optional": [
+          "dnw"
+        ],
+        "computed": [
+          "formattedECID"
+        ]
+      },
+      "content_path": "templates/disapproval/disapproval_with_response.txt"
+    },
+    "disapproval_speculation": {
+      "id": "disapproval_speculation",
+      "name": "不承認（推測）",
+      "workflow_type": "disapproval",
+      "category": "不承認",
+      "subcategory": "推測",
+      "description": "推測に基づく不承認説明のテンプレート",
+      "variables": {
+        "required": [
+          "contactName",
+          "myName",
+          "opening",
+          "channel",
+          "overview",
+          "ecid",
+          "detailedPolicy",
+          "violationDetails"
+        ],
+        "optional": [],
+        "computed": [
+          "formattedECID"
+        ]
+      },
+      "content_path": "templates/disapproval/disapproval_speculation.txt"
+    },
+    "cert_approved": {
+      "id": "cert_approved",
+      "name": "認定承認",
+      "workflow_type": "certification",
+      "category": "Certification（認定）",
+      "subcategory": "承認",
+      "description": "認定が承認された場合のテンプレート",
+      "variables": {
+        "required": [
+          "contactName",
+          "myName",
+          "certName",
+          "certEcid",
+          "certDomain"
+        ],
+        "optional": [
+          "thankYouNote",
+          "restrictedNotation",
+          "safeSearchRequired",
+          "appealRequired"
+        ],
+        "computed": []
+      },
+      "content_path": "templates/certification/cert_approved.txt"
+    },
+    "cert_already_certified": {
+      "id": "cert_already_certified",
+      "name": "既に認定済み",
+      "workflow_type": "certification",
+      "category": "Certification（認定）",
+      "subcategory": "既認定",
+      "description": "既に認定が完了している場合のテンプレート",
+      "variables": {
+        "required": [
+          "contactName",
+          "myName",
+          "certName",
+          "certEcid",
+          "certDomain"
+        ],
+        "optional": [],
+        "computed": []
+      },
+      "content_path": "templates/certification/cert_already_certified.txt"
+    },
+    "other_temp_reply": {
+      "id": "other_temp_reply",
+      "name": "一時返信",
+      "workflow_type": "other",
+      "category": "一時返信",
+      "subcategory": "標準",
+      "description": "調査中の一時返信テンプレート",
+      "variables": {
+        "required": [
+          "contactName",
+          "myName",
+          "opening",
+          "channel",
+          "delayReason",
+          "replyDate"
+        ],
+        "optional": [
+          "firstOrNot",
+          "selfOrNot"
+        ],
+        "computed": [
+          "formattedReplyDate"
+        ]
+      },
+      "content_path": "templates/other/temp_reply.txt"
+    },
+    "other_need_info": {
+      "id": "other_need_info",
+      "name": "追加情報必要",
+      "workflow_type": "other",
+      "category": "その他",
+      "subcategory": "Need Info",
+      "description": "追加情報が必要な場合のテンプレート",
+      "variables": {
+        "required": [
+          "contactName",
+          "myName",
+          "opening",
+          "channel",
+          "overview",
+          "requiredInfo"
+        ],
+        "optional": [],
+        "computed": []
+      },
+      "content_path": "templates/other/need_info.txt"
+    },
+    "other_bug_report": {
+      "id": "other_bug_report",
+      "name": "Bug報告",
+      "workflow_type": "other",
+      "category": "その他",
+      "subcategory": "Bug",
+      "description": "技術的な問題を報告する場合のテンプレート",
+      "variables": {
+        "required": [
+          "contactName",
+          "myName",
+          "opening",
+          "channel",
+          "overview",
+          "priority"
+        ],
+        "optional": [],
+        "computed": [
+          "formattedDate"
+        ]
+      },
+      "content_path": "templates/other/bug_report.txt",
+      "priority_mapping": {
+        "P0": "1週間",
+        "P1": "1ヶ月",
+        "P2": "3ヶ月",
+        "P3": "6ヶ月"
+      }
+    }
+  },
+  "variable_mappings": {
+    "contactName": {
+      "type": "text",
+      "label": "連絡先名",
+      "placeholder": "お客様の名前",
+      "validation": "required",
+      "helpText": "メールの冒頭と本文中で使用されます"
+    },
+    "myName": {
+      "type": "text",
+      "label": "自分の名字",
+      "placeholder": "担当者名",
+      "validation": "required",
+      "helpText": "送信者の名字を入力"
+    },
+    "ecid": {
+      "type": "text",
+      "label": "ECID",
+      "placeholder": "1234567890",
+      "validation": {
+        "pattern": "^\\d{10}$",
+        "message": "ECIDは10桁の数字で入力してください"
+      },
+      "transform": "formatECID"
+    },
+    "opening": {
+      "type": "select",
+      "label": "Opening",
+      "options": [
+        {
+          "value": "0",
+          "label": "お問い合わせをいただき誠にありがとうございます。",
+          "condition": "normal"
+        },
+        {
+          "value": "1",
+          "label": "ご連絡をお待たせし申し訳ございません。",
+          "condition": "delayed"
+        }
+      ],
+      "default": "0"
+    },
+    "channel": {
+      "type": "select",
+      "label": "Channel",
+      "options": [
+        {
+          "value": "0",
+          "label": "チャットにて",
+          "tag": "Chat"
+        },
+        {
+          "value": "1",
+          "label": "お電話にて",
+          "tag": "Phone"
+        },
+        {
+          "value": "2",
+          "label": "お問い合わせフォームより",
+          "tag": "OpenE"
+        },
+        {
+          "value": "3",
+          "label": "メールのご返信にて",
+          "tag": "Re-Open"
+        }
+      ],
+      "default": "0"
+    },
+    "status": {
+      "type": "select",
+      "label": "ステータス",
+      "options": [
+        {
+          "value": "0",
+          "label": "制限付き"
+        },
+        {
+          "value": "1",
+          "label": "不承認"
+        }
+      ],
+      "default": "0"
+    },
+    "adtype": {
+      "type": "select",
+      "label": "広告タイプ",
+      "options": [
+        {
+          "value": "広告",
+          "label": "広告"
+        },
+        {
+          "value": "アセットグループ",
+          "label": "アセットグループ",
+          "condition": "pmax"
+        }
+      ],
+      "default": "広告",
+      "helpText": "P-MAXの場合はアセットグループを選択"
+    },
+    "delayReason": {
+      "type": "select",
+      "label": "遅れる理由",
+      "options": [
+        {
+          "value": "1",
+          "label": "現在確認を行っておりますが、窓口混雑のため調査完了までにお時間を頂戴しております。"
+        },
+        {
+          "value": "2",
+          "label": "現在社内で確認中の状況でございます。"
+        },
+        {
+          "value": "3",
+          "label": "引き続き担当部署へ確認中の状況でございます。"
+        }
+      ]
+    },
+    "certName": {
+      "type": "select",
+      "label": "認定の種類",
+      "options": [
+        {
+          "value": "オンラインギャンブル",
+          "label": "オンラインギャンブル関連広告"
+        },
+        {
+          "value": "出会い系",
+          "label": "出会い系とコンパニオンサービス"
+        },
+        {
+          "value": "ヘルスケア",
+          "label": "ヘルスケア関連"
+        },
+        {
+          "value": "遠隔医療",
+          "label": "遠隔医療事業者"
+        },
+        {
+          "value": "債務関連",
+          "label": "債務関連サービス"
+        }
+      ]
+    },
+    "priority": {
+      "type": "select",
+      "label": "優先度",
+      "options": [
+        {
+          "value": "P0",
+          "label": "P0: 緊急（1週間）"
+        },
+        {
+          "value": "P1",
+          "label": "P1: 高（1ヶ月）"
+        },
+        {
+          "value": "P2",
+          "label": "P2: 中（3ヶ月）"
+        },
+        {
+          "value": "P3",
+          "label": "P3: 低（6ヶ月）"
+        }
+      ]
+    }
+  },
+  "computed_variables": {
+    "formattedECID": {
+      "type": "computed",
+      "source": "ecid",
+      "transform": "formatECID",
+      "pattern": "XXX-XXX-XXXX"
+    },
+    "statusText": {
+      "type": "computed",
+      "source": "status",
+      "mapping": {
+        "0": "制限付き",
+        "1": "不承認"
+      }
+    },
+    "formattedDate": {
+      "type": "computed",
+      "source": "system.date",
+      "format": "M月D日"
+    },
+    "formattedReplyDate": {
+      "type": "computed",
+      "source": "replyDate",
+      "format": "M月D日",
+      "fallback": "nextBusinessDay"
+    },
+    "today": {
+      "type": "computed",
+      "source": "system.date",
+      "format": "M月D日"
+    },
+    "nextBusinessDay": {
+      "type": "computed",
+      "source": "system.date",
+      "transform": "addBusinessDays",
+      "params": {
+        "days": 1
+      }
+    }
+  },
+  "conditional_logic": {
+    "showDnwCheckbox": {
+      "condition": {
+        "workflow_type": "disapproval",
+        "status": "不承認（回答あり）"
+      },
+      "show": ["dnw"]
+    },
+    "showCertificationFields": {
+      "condition": {
+        "workflow_type": "certification"
+      },
+      "show": ["certName", "certEcid", "certDomain"]
+    },
+    "showDelayFields": {
+      "condition": {
+        "workflow_type": "other",
+        "type": "一時返信"
+      },
+      "show": ["delayReason", "replyDate", "firstOrNot", "selfOrNot"]
+    }
+  },
+  "template_groups": {
+    "misreview": {
+      "name": "誤審査",
+      "templates": ["review_approved", "review_already_resolved", "review_checking"],
+      "icon": "fas fa-exclamation-triangle",
+      "color": "#ffc107"
+    },
+    "disapproval": {
+      "name": "不承認",
+      "templates": ["disapproval_with_response", "disapproval_speculation"],
+      "icon": "fas fa-times-circle",
+      "color": "#dc3545"
+    },
+    "certification": {
+      "name": "認定",
+      "templates": ["cert_approved", "cert_already_certified"],
+      "icon": "fas fa-certificate",
+      "color": "#198754"
+    },
+    "other": {
+      "name": "その他",
+      "templates": ["other_temp_reply", "other_need_info", "other_bug_report"],
+      "icon": "fas fa-ellipsis-h",
+      "color": "#0dcaf0"
+    }
+  },
+  "transformations": {
+    "formatECID": {
+      "type": "function",
+      "description": "10桁のECIDをXXX-XXX-XXXX形式にフォーマット",
+      "input": "string",
+      "output": "string",
+      "logic": "input.slice(0,3) + '-' + input.slice(3,6) + '-' + input.slice(6)"
+    },
+    "addBusinessDays": {
+      "type": "function",
+      "description": "営業日を加算",
+      "input": "date",
+      "params": ["days"],
+      "output": "date",
+      "excludes": ["saturday", "sunday", "japanese_holidays"]
+    },
+    "formatDate": {
+      "type": "function",
+      "description": "日付を日本語形式にフォーマット",
+      "input": "date",
+      "output": "string",
+      "format": "M月D日"
+    }
+  },
+  "validation_rules": {
+    "ecid": {
+      "pattern": "^\\d{10}$",
+      "message": "ECIDは10桁の数字で入力してください",
+      "required": true
+    },
+    "email": {
+      "pattern": "^[^\\s@]+@[^\\s@]+\\.[^\\s@]+$",
+      "message": "有効なメールアドレスを入力してください",
+      "required": false
+    },
+    "domain": {
+      "pattern": "^[a-z0-9.-]+\\.[a-z]{2,}$",
+      "message": "有効なドメイン名を入力してください",
+      "required": true
+    },
+    "date": {
+      "type": "date",
+      "min": "today",
+      "max": "+30days",
+      "message": "今日から30日以内の日付を選択してください"
+    }
+  },
+  "metadata": {
+    "version": "2.0",
+    "lastModified": "2024-01-01T00:00:00Z",
+    "author": "PolicyPlayBook Team",
+    "description": "テンプレートマッピング設定ファイル",
+    "compatibility": {
+      "minVersion": "1.0",
+      "maxVersion": "3.0"
+    }
+  }
+}
