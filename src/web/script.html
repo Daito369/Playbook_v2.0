@@ -1,1 +1,68 @@
+<script>
+  const appEl = document.getElementById('app');
+  const currentWorkflow = {};
 
+  function renderTypes(data) {
+    const card = document.createElement('div');
+    card.className = 'card step-card';
+    const content = document.createElement('div');
+    content.className = 'card-content';
+    const title = document.createElement('span');
+    title.className = 'card-title';
+    title.textContent = 'ワークフロー種類を選択';
+    content.appendChild(title);
+    const list = document.createElement('ul');
+    list.className = 'collection';
+    data.availableTypes.forEach((t) => {
+      const item = document.createElement('li');
+      item.className = 'collection-item workflow-option';
+      item.textContent = t.label;
+      item.addEventListener('click', () => selectType(t.id));
+      list.appendChild(item);
+    });
+    content.appendChild(list);
+    card.appendChild(content);
+    appEl.innerHTML = '';
+    appEl.appendChild(card);
+  }
+
+  function selectType(type) {
+    currentWorkflow.type = type;
+    google.script.run.withSuccessHandler(renderPolicies).fetchPolicies(type);
+    google.script.run.advanceWorkflow(currentWorkflow.workflowId, 'selectType');
+  }
+
+  function renderPolicies(categories) {
+    const card = document.createElement('div');
+    card.className = 'card step-card';
+    const content = document.createElement('div');
+    content.className = 'card-content';
+    const title = document.createElement('span');
+    title.className = 'card-title';
+    title.textContent = 'カテゴリを選択';
+    content.appendChild(title);
+    const list = document.createElement('ul');
+    list.className = 'collection';
+    categories.forEach((c) => {
+      const item = document.createElement('li');
+      item.className = 'collection-item';
+      item.textContent = c.name;
+      list.appendChild(item);
+    });
+    content.appendChild(list);
+    card.appendChild(content);
+    appEl.innerHTML = '';
+    appEl.appendChild(card);
+  }
+
+  function init() {
+    google.script.run
+      .withSuccessHandler((data) => {
+        currentWorkflow.workflowId = data.workflowId;
+        renderTypes(data);
+      })
+      .initializeWorkflow({});
+  }
+
+  document.addEventListener('DOMContentLoaded', init);
+</script>
